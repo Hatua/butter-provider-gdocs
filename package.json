@@ -1,7 +1,7 @@
 {
-  "name": "butter-provider-youtube",
+  "name": "butter-provider-gdocs",
   "version": "0.3.0",
-  "description": "A Butter provider for youtube media servers",
+  "description": "A Butter provider to grab content from Google Docs",
   "main": "index.js",
   "scripts": {
     "test": "mocha ./node_modules/butter-provider/tests/*",
@@ -9,29 +9,28 @@
   },
   "butter": {
     "timeout": 20000,
-    "testArgs": "youtube?channel=TEDtalksDirector"
+    "testArgs": "gdocs?doc=1cR-jUrhPNA-tJfMyilDvvwvXkWYFMHlld81CWMXkFdg"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/butterproviders/butter-provider-youtube.git"
+    "url": "git+https://github.com/butterproviders/butter-provider-gdocs.git"
   },
   "keywords": [
-    "youtube",
+    "gdocs",
     "butter",
     "streaming"
   ],
   "author": "Niv Sardi",
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/butterproviders/butter-provider-youtube/issues"
+    "url": "https://github.com/butterproviders/butter-provider-gdocs/issues"
   },
-  "homepage": "https://github.com/butterproviders/butter-provider-youtube#readme",
+  "homepage": "https://github.com/butterproviders/butter-provider-gdocs#readme",
   "dependencies": {
     "butter-provider": "butterproviders/butter-provider",
     "debug": "^3.1.0",
-    "defer-request": "0.0.2",
-    "moment": "^2.11.1",
-    "node-youtubeapi-simplifier": "^1.4.0"
+    "google-spreadsheet-to-json": "^1.0.0",
+    "node-youtubeapi-simplifier": "^1.4.2"
   },
   "devDependencies": {
     "butter-test-provider": "butterproviders/butter-test-provider",
