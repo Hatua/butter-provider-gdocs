@@ -1,11 +1,9 @@
 'use strict'
 
 const Provider = require('butter-provider')
-// const API = require('node-youtubeapi-simplifier');
-// const debug = require('debug')('butter-provider-gdocs')
 
 const getGDocsData = require('./gdocs')
-const getYoutubeData = require('./youtube')
+const PicoTube = require('picotube').default
 
 const defaultConfig = {
   name: 'gdocs',
@@ -89,8 +87,7 @@ module.exports = class GDocs extends Provider {
     this.spreadsheetId = this.args.gdocsSpreadSheetId
     this.headerStart = this.args.gdocsHeaderStart
 
-    //        this.API = API
-    //        this.API.setup(this.youtubeApiKey)
+    this.pico = new PicoTube(this.youtubeApiKey)
   }
 
   queryTorrents (filters = {}) {
@@ -126,8 +123,11 @@ module.exports = class GDocs extends Provider {
   getVideoInfo (items) {
     const ids = items.map(item => (yt2ID(item['Link youtube']))).join(',')
 
-    return getYoutubeData(ids, this.youtubeApiKey)
-      .then(({data}) => data.items)
+    return this.pico.videos({
+      id: ids
+    }).then(({data}) => data.items)
+               .then(d => { console.error(d); return d
+               })
       .then(info => (items.map((item, i) => ({
         ...item,
         id: info[i].id,
