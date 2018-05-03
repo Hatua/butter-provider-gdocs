@@ -2,7 +2,7 @@
   "name": "butter-provider-gdocs",
   "version": "0.3.0",
   "description": "A Butter provider to grab content from Google Docs",
-  "main": "index.js",
+  "main": "bundle.js",
   "scripts": {
     "test": "mocha ./node_modules/butter-provider/tests/*",
     "lint": "eslint tests/** index.js"
@@ -27,13 +27,14 @@
   },
   "homepage": "https://github.com/butterproviders/butter-provider-gdocs#readme",
   "dependencies": {
+    "axios": "^0.18.0",
     "butter-provider": "butterproviders/butter-provider",
-    "debug": "^3.1.0",
-    "google-spreadsheet-to-json": "^1.0.0",
-    "node-youtubeapi-simplifier": "^1.4.2"
+    "debug": "^3.1.0"
   },
   "devDependencies": {
+    "browserify": "^16.2.0",
     "butter-test-provider": "butterproviders/butter-test-provider",
+    "standard": "^11.0.1",
     "tape": "^4.5.1"
   }
 }
