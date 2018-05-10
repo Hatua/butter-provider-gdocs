@@ -49,6 +49,7 @@ const formatItemForButter = (item) => ({
   rating: item.statistics.likeCount,
   genres: [item.genre],
   backdrop: item.thumbnails.high.url,
+  cover: item.thumbnails.high.url,
   poster: item.thumbnails.high.url,
   trailer: item.linkYoutube,
   synopsis: item.synopsis || item.description || 'no synopsis provided',
@@ -126,8 +127,6 @@ module.exports = class GDocs extends Provider {
     return this.pico.videos({
       id: ids
     }).then(({data}) => data.items)
-               .then(d => { console.error(d); return d
-               })
       .then(info => (items.map((item, i) => ({
         ...item,
         id: info[i].id,
