@@ -42,19 +42,20 @@ const translateData = (data) => {
   return data
 }
 
-const formatItemForButter = (item) => ({
+const formatItemForButter = ({
+  statistics, thumbnails, linkYoutube, synopsis, description, genre, ...item
+}) => ({
   ...item,
   type: Provider.ItemType.MOVIE,
   // XXX(xaiki): should calculate something usefull here
-  rating: item.statistics.likeCount,
-  genres: [item.genre],
-  backdrop: item.thumbnails.high.url,
-  cover: item.thumbnails.high.url,
-  poster: item.thumbnails.high.url,
-  trailer: item.linkYoutube,
-  synopsis: item.synopsis || item.description || 'no synopsis provided',
+  rating: (statistics.likeCount - statistics.dislikeCount*0.8)/(statistics.viewCount/50),
+  genres: [genre],
+  backdrop: thumbnails.high.url,
+  cover: thumbnails.high.url,
+  poster: thumbnails.high.url,
+  trailer: linkYoutube,
+  synopsis: synopsis || description || 'no synopsis provided',
   // HACK
-  subtitle: [],
   subtitles: [],
   torrents: [{
     '720p': {
