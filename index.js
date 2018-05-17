@@ -56,7 +56,7 @@ const formatItemForButter = ({
   trailer: linkYoutube,
   synopsis: synopsis || description || 'no synopsis provided',
   // HACK
-  subtitles: [],
+  subtitle: [],
   torrents: [{
     '720p': {
       url: null,
