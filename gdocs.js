@@ -6,7 +6,7 @@ const buildGDocsURL = (key) => (
     `https://spreadsheets.google.com/feeds/list/${key}/od6/public/values?alt=json`
 )
 
-const getGDocsData = (spreadsheetId) => (
+const getGDocsData = (spreadsheetId, page = 0, limit = 50) => (
     axios.get(buildGDocsURL(spreadsheetId))
                 .then(({data}) => {
                     const entries = Object.values(data.feed.entry)
@@ -22,7 +22,7 @@ const getGDocsData = (spreadsheetId) => (
                         })
                     }, {})
 
-                    return rows.map(entry => (
+                    return rows.slice(page*limit, page*limit + limit).map(entry => (
                         keyDescriptorsKeys.reduce((acc, key) => {
                             if (! entry[key]) {
                                 return acc

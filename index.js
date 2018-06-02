@@ -96,7 +96,6 @@ module.exports = class GDocs extends Provider {
     var params = {}
     //        var genres = '';
     params.sort = 'seeds'
-    params.limit = '50'
 
     if (filters.genre) {
       /* filters.genres.forEach(function(g) {
@@ -115,7 +114,7 @@ module.exports = class GDocs extends Provider {
       params.sort = filters.sorter
     }
 
-    return getGDocsData(this.spreadsheetId)
+    return getGDocsData(this.spreadsheetId, filters.page, filters.limit)
   }
 
   translateData (items) {
