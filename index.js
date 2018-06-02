@@ -138,6 +138,13 @@ module.exports = class GDocs extends Provider {
   }
 
   fetch (filters = {}) {
+    if (filters.page) {
+      return Promise.resolve({
+        results: [],
+        hasMore: false
+      })
+    }
+
     return this.queryTorrents(filters)
       .then(this.translateData)
       .then(this.getVideoInfo.bind(this))
