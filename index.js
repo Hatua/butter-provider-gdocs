@@ -57,9 +57,9 @@ const formatItemForButter = ({
   synopsis: synopsis || description || 'no synopsis provided',
   // HACK
   subtitle: [],
-  torrents: [{
+  sources: [{
     '720p': {
-      url: null,
+      url: linkYoutube,
       size: 0
     }
   }],
@@ -92,7 +92,7 @@ module.exports = class GDocs extends Provider {
     this.pico = new PicoTube(this.youtubeApiKey)
   }
 
-  queryTorrents (filters = {}) {
+  querySources (filters = {}) {
     var params = {}
     //        var genres = '';
     params.sort = 'seeds'
@@ -137,9 +137,21 @@ module.exports = class GDocs extends Provider {
   }
 
   fetch (filters = {}) {
-    return this.queryTorrents(filters)
+    return this.querySources(filters)
       .then(this.translateData)
       .then(this.getVideoInfo.bind(this))
       .then(formatForButter)
   }
+  /*
+     detail (id, old_data) {
+     return this.pico.captions({
+     id: id
+     }).then(({data}) => data.items)
+     .then(captions => Object.assign({}, old_data, {
+     subtitle: captions.reduce((acc, cur) => Object.assign(acc, {
+     [cur.language]: cur
+     }), {})
+     }))
+     }
+   */
 }
