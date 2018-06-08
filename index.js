@@ -43,27 +43,33 @@ const translateData = (data) => {
 }
 
 const formatItemForButter = ({
-  statistics, thumbnails, linkYoutube, synopsis, description, genre, ...item
-}) => ({
-  ...item,
-  type: Provider.ItemType.MOVIE,
-  // XXX(xaiki): should calculate something usefull here
-  rating: (statistics.likeCount - statistics.dislikeCount*0.8)/(statistics.viewCount/50),
-  genres: [genre],
-  backdrop: thumbnails.high.url,
-  cover: thumbnails.high.url,
-  poster: thumbnails.high.url,
-  trailer: linkYoutube,
-  synopsis: synopsis || description || 'no synopsis provided',
-  // HACK
-  subtitle: [],
-  sources: [{
-    '720p': {
-      url: linkYoutube,
-      size: 0
+  CAPA,
+  statistics, thumbnails, synopsis, description, genre, ...item
+}) => {
+  const linkYoutube = item['Link youtube']
+  delete item['Link youtube']
+
+  return ({
+    ...item,
+    type: Provider.ItemType.MOVIE,
+    // XXX(xaiki): should calculate something usefull here
+    rating: (statistics.likeCount - statistics.dislikeCount*0.8)/(statistics.viewCount/50),
+    genres: [genre],
+    backdrop: thumbnails.high.url,
+    cover: thumbnails.high.url,
+    poster: thumbnails.high.url,
+    trailer: linkYoutube,
+    synopsis: synopsis || description || 'no synopsis provided',
+    // HACK
+    subtitle: [],
+    sources: {
+      '720p': {
+        url: linkYoutube,
+        size: 0
+      }
     }
-  }],
-})
+  })
+}
 
 const formatForButter = (items) => ({
   results: items.map(formatItemForButter),
