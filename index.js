@@ -109,7 +109,7 @@ module.exports = class GDocs extends Provider {
                });
                genres = genres.substring(0, genres.length - 1);
                win.info('genres', genres); */
-      params.genre = filters.genres[0]
+      params.genre = filters.genre
     }
 
     if (filters.order) {
