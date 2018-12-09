@@ -2,7 +2,7 @@
 
 const Provider = require('butter-provider')
 
-const getGDocsData = require('./gdocs')
+const PicoSheet = require('picosheet')
 const PicoTube = require('picotube').default
 
 const defaultConfig = {
@@ -120,7 +120,7 @@ module.exports = class GDocs extends Provider {
       params.sort = filters.sorter
     }
 
-    return getGDocsData(this.spreadsheetId, filters.page, filters.limit)
+    return PicoSheet(this.spreadsheetId, filters.page, filters.limit)
   }
 
   translateData (items) {
