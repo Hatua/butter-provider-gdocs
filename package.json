@@ -2,7 +2,7 @@
   "name": "butter-provider-gdocs",
   "version": "0.3.0",
   "description": "A Butter provider to grab content from Google Docs",
-  "main": "bundle.js",
+  "main": "index.js",
   "scripts": {
     "test": "mocha ./node_modules/butter-provider/tests/*",
     "lint": "eslint tests/** index.js"
